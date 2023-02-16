@@ -30,14 +30,12 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     @Override
     public E get(int index) {
         Objects.checkIndex(index, size);
-        int count = 0;
         Node<E> temp = head;
-        while (temp.next != null) {
-            if (count == index) {
+        for (int i = 0; temp.next != null; i++) {
+            if (i == index) {
                 return temp.item;
             }
             temp = temp.next;
-            count++;
         }
         return temp.item;
     }
