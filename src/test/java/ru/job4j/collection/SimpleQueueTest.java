@@ -56,4 +56,13 @@ class SimpleQueueTest {
         queue.push(3);
         assertThat(queue.poll()).isEqualTo(2);
     }
+
+    @Test
+    void when2PushAnd3Poll() {
+        queue.push(2);
+        queue.poll();
+        queue.poll();
+        assertThatThrownBy(queue::poll)
+                .isInstanceOf(NoSuchElementException.class);
+    }
 }
