@@ -17,28 +17,25 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public boolean put(K key, V value) {
         boolean result = false;
-        if (table[getIndex(key)] == null) {
-            table[getIndex(key)] = new MapEntry<>(key, value);
+        int index = getIndex(key);
+        if (table[index] == null) {
+            table[index] = new MapEntry<>(key, value);
             result = true;
             count++;
             modCount++;
         }
-        if (count * 1.0 / capacity >= LOAD_FACTOR) {
+        if (count >= capacity * LOAD_FACTOR) {
             expand();
         }
         return result;
     }
 
     private int getIndex(K key) {
-        return indexFor(hash(getHashcode(key)));
-    }
-
-    private int getHashcode(K key) {
-        return key == null ? 0 : key.hashCode();
+        return indexFor(hash(Objects.hashCode(key)));
     }
 
     private int hash(int hashCode) {
-        return hashCode == 0 ? 0 : hashCode ^ hashCode >>> 16;
+        return hashCode ^ hashCode >>> 16;
     }
 
     private int indexFor(int hash) {
@@ -50,9 +47,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
         MapEntry<K, V>[] temp = new MapEntry[capacity];
         for (MapEntry<K, V> i : table) {
             if (i != null) {
-                if (temp[getIndex(i.key)] == null) {
-                    temp[getIndex(i.key)] = i;
-                }
+                temp[getIndex(i.key)] = i;
             }
         }
         table = temp;
@@ -60,14 +55,16 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public V get(K key) {
-        return isEquals(key) ? table[getIndex(key)].value : null;
+        int index = getIndex(key);
+        return isEquals(key, index) ? table[index].value : null;
     }
 
     @Override
     public boolean remove(K key) {
         boolean result = false;
-        if (isEquals(key)) {
-            table[getIndex(key)] = null;
+        int index = getIndex(key);
+        if (isEquals(key, index)) {
+            table[index] = null;
             result = true;
             count--;
             modCount++;
@@ -75,9 +72,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
         return result;
     }
 
-    private boolean isEquals(K key) {
-        MapEntry<K, V> temp = table[getIndex(key)];
-        return temp != null && getHashcode(key) == getHashcode(temp.key) && Objects.equals(temp.key, key);
+    private boolean isEquals(K key, int index) {
+        MapEntry<K, V> temp = table[index];
+        return temp != null && Objects.hashCode(key) == Objects.hashCode(temp.key) && Objects.equals(temp.key, key);
     }
 
     @Override
