@@ -8,9 +8,12 @@ public class LogFilter {
     public List<String> filter(String file) {
         List<String> list = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-            in.lines()
-                    .filter(e -> e.contains(" 404 "))
-                    .forEach(list::add);
+            for (String line = in.readLine(); line != null; line = in.readLine()) {
+                String[] array = line.split(" ");
+                if ("404".equals(array[array.length - 2])) {
+                    list.add(line);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
