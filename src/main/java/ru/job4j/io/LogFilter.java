@@ -8,21 +8,22 @@ public class LogFilter {
     public List<String> filter(String file) {
         List<String> list = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-            for (String line = in.readLine(); line != null; line = in.readLine()) {
-                String[] array = line.split(" ");
-                if ("404".equals(array[array.length - 2])) {
-                    list.add(line);
-                }
-            }
-        } catch (Exception e) {
+            in.lines()
+                    .filter(s -> {
+                        String[] array = s.split(" ");
+                        return "404".equals(array[array.length - 2]);
+                    })
+                    .forEach(list::add);
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
         return list;
     }
 
     public static void main(String[] args) {
         LogFilter logFilter = new LogFilter();
         List<String> log = logFilter.filter("data/log.txt");
-        System.out.println(log);
+        log.forEach(System.out::println);
     }
 }
