@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.StringJoiner;
 
 public class Config {
@@ -20,7 +19,7 @@ public class Config {
     public void load() {
         try (BufferedReader out = new BufferedReader(new FileReader(path))) {
             out.lines()
-                    .filter(s -> !s.contains("#") && s.contains("="))
+                    .filter(s -> !s.startsWith("#") && s.contains("="))
                     .forEach(s -> {
                         String[] array = s.split("=", 2);
                         values.put(array[0], array[1]);
@@ -32,10 +31,7 @@ public class Config {
 
     public String value(String key) {
         String result = values.get(key);
-        if (!values.containsKey(key)) {
-            throw new NoSuchElementException("Element not found");
-        }
-        if ("".equals(key) || "".equals(result)) {
+        if (!values.containsKey(key) || "".equals(key) || "".equals(result)) {
             throw new IllegalArgumentException();
         }
         return result;
