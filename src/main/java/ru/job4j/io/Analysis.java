@@ -11,12 +11,11 @@ public class Analysis {
             String added;
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 boolean startsWith = line.startsWith("5") || line.startsWith("4");
+                added = line.split(" ")[1];
                 if (startsWith && !flag) {
                     flag = true;
-                    added = line.split(" ")[1];
                     result.append(added).append(";");
                 } else if (!startsWith && flag) {
-                    added = line.split(" ")[1];
                     result.append(added).append(System.lineSeparator());
                     flag = false;
                 }
