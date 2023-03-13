@@ -6,17 +6,16 @@ public class Analysis {
     public void unavailable(String source, String target) {
         try (BufferedReader in = new BufferedReader(new FileReader(source));
              PrintWriter out = new PrintWriter(target)) {
-            boolean flag = false;
+            String flag = null;
             String added;
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 boolean startsWith = line.startsWith("5") || line.startsWith("4");
                 added = line.split(" ")[1];
-                if (startsWith && !flag) {
-                    flag = true;
-                    out.print(added + ";");
-                } else if (!startsWith && flag) {
-                    out.println(added);
-                    flag = false;
+                if (startsWith && flag == null) {
+                    flag = added;
+                } else if (!startsWith && flag != null) {
+                    out.println(flag + ";" + added);
+                    flag = null;
                 }
             }
         } catch (IOException e) {
