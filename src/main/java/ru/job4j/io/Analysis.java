@@ -6,7 +6,6 @@ public class Analysis {
     public void unavailable(String source, String target) {
         try (BufferedReader in = new BufferedReader(new FileReader(source));
              PrintWriter out = new PrintWriter(target)) {
-            StringBuilder result = new StringBuilder();
             boolean flag = false;
             String added;
             for (String line = in.readLine(); line != null; line = in.readLine()) {
@@ -14,13 +13,12 @@ public class Analysis {
                 added = line.split(" ")[1];
                 if (startsWith && !flag) {
                     flag = true;
-                    result.append(added).append(";");
+                    out.print(added + ";");
                 } else if (!startsWith && flag) {
-                    result.append(added).append(System.lineSeparator());
+                    out.println(added);
                     flag = false;
                 }
             }
-            out.println(result);
         } catch (IOException e) {
             e.printStackTrace();
         }
