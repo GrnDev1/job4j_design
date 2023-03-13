@@ -22,6 +22,9 @@ public class Config {
                     .filter(s -> !s.startsWith("#") && s.contains("="))
                     .forEach(s -> {
                         String[] array = s.split("=", 2);
+                        if ("".equals(array[0]) || "".equals(array[1])) {
+                            throw new IllegalArgumentException();
+                        }
                         values.put(array[0], array[1]);
                     });
         } catch (IOException e) {
@@ -31,7 +34,7 @@ public class Config {
 
     public String value(String key) {
         String result = values.get(key);
-        if (!values.containsKey(key) || "".equals(key) || "".equals(result)) {
+        if (!values.containsKey(key)) {
             throw new IllegalArgumentException();
         }
         return result;

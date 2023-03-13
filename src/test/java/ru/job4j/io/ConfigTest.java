@@ -18,8 +18,7 @@ class ConfigTest {
     void whenPairWithoutIllegalArgumentException() {
         String path = "data/pair_with_exceptions.properties";
         Config config = new Config(path);
-        config.load();
-        assertThatThrownBy(() -> config.value("alex"))
+        assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
