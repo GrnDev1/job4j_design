@@ -23,7 +23,7 @@ public class Search {
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
         }
-        if (!args[1].startsWith(".")) {
+        if (args[1].length() < 2 || !args[1].startsWith(".")) {
             throw new IllegalArgumentException("Extension does not exist");
         }
     }
