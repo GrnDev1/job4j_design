@@ -1,5 +1,6 @@
 package ru.job4j.io;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,7 +17,14 @@ public class Search {
 
     private static void validate(String[] args) {
         if (args.length < 2) {
-            throw new IllegalArgumentException("Add Root folder and file extension");
+            throw new IllegalArgumentException("Add Root folder and file ");
+        }
+        File file = new File(args[0]);
+        if (!file.exists()) {
+            throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
+        }
+        if (!args[1].startsWith(".")) {
+            throw new IllegalArgumentException("Extension does not exist");
         }
     }
 
