@@ -8,9 +8,26 @@ public class ArgsName {
 
     private final Map<String, String> values = new HashMap<>();
 
+    private void validate(String[] array, String s) {
+        if (array.length == 1) {
+            throw new IllegalArgumentException(String.format("Error: This argument '%s' does not contain an equal sign", s));
+        }
+        String first = array[0];
+        String second = array[1];
+        if (!first.startsWith("-")) {
+            throw new IllegalArgumentException(String.format("Error: This argument '%s' does not start with a '-' character", s));
+        }
+        if (first.length() < 2) {
+            throw new IllegalArgumentException(String.format("Error: This argument '%s' does not contain a key", s));
+        }
+        if ("".equals(second)) {
+            throw new IllegalArgumentException(String.format("Error: This argument '%s' does not contain a value", s));
+        }
+    }
+
     public String get(String key) {
         if (!values.containsKey(key)) {
-            throw new IllegalArgumentException("This key: '" + key + "' is missing");
+            throw new IllegalArgumentException(String.format("This key: '%s' is missing", key));
         }
         return values.get(key);
     }
@@ -19,21 +36,8 @@ public class ArgsName {
         Arrays.stream(args)
                 .forEach(s -> {
                     String[] array = s.split("=", 2);
-                    if (array.length == 1) {
-                        throw new IllegalArgumentException("Error: This argument '" + s + "' does not contain an equal sign");
-                    }
-                    String first = array[0];
-                    String second = array[1];
-                    if (!first.startsWith("-")) {
-                        throw new IllegalArgumentException("Error: This argument '" + s + "' does not start with a '-' character");
-                    }
-                    if (first.length() < 2) {
-                        throw new IllegalArgumentException("Error: This argument '" + s + "' does not contain a key");
-                    }
-                    if ("".equals(second)) {
-                        throw new IllegalArgumentException("Error: This argument '" + s + "' does not contain a value");
-                    }
-                    values.put(first.substring(1), second);
+                    validate(array, s);
+                    values.put(array[0].substring(1), array[1]);
                 });
     }
 
