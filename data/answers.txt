@@ -1,0 +1,5 @@
+Назвать методы Object
+Сравнение по == и по equals
+Interface vs Abstract Class
+override vs overload
+Создание singleton?
