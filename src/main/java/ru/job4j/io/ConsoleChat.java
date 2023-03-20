@@ -22,18 +22,15 @@ public class ConsoleChat {
         List<String> botList = readPhrases();
         String message = "Приложение запущено:";
         Scanner scanner = new Scanner(System.in);
-        boolean flag = true;
         boolean mod = true;
+        boolean flag = true;
         System.out.println(message);
         log.add(message);
         while (flag) {
             System.out.print("User: ");
             message = scanner.nextLine();
+            flag = !OUT.equals(message);
             log.add("User: " + message);
-            if (OUT.equals(message)) {
-                flag = false;
-                mod = false;
-            }
             if (STOP.equals(message)) {
                 mod = false;
                 continue;
@@ -41,7 +38,7 @@ public class ConsoleChat {
             if (CONTINUE.equals(message)) {
                 mod = true;
             }
-            if (mod) {
+            if (mod && flag) {
                 String temp = "ChatBot: " + botList.get((int) (Math.random() * botList.size()));
                 log.add(temp);
                 System.out.println(temp);

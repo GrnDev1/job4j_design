@@ -1,10 +1,8 @@
 Приложение запущено:
 User: да
-ChatBot: Назвать методы Object
-User: equals
-ChatBot: Назвать методы Object
-User: стоп
-User: нет
-User: продолжить
 ChatBot: Interface vs Abstract Class
+User: стоп
+User: проверка
+User: продолжить
+ChatBot: Создание singleton?
 User: закончить
