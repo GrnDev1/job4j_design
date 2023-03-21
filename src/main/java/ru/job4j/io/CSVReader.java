@@ -41,10 +41,10 @@ public class CSVReader {
                 builder.append(System.lineSeparator());
             }
             if ("stdout".equals(out)) {
-                System.out.println(builder);
+                System.out.print(builder);
             } else {
                 try (PrintWriter writer = new PrintWriter(out)) {
-                    writer.println(builder);
+                    writer.print(builder);
                 }
             }
         } catch (IOException e) {
