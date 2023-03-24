@@ -15,8 +15,14 @@ public class EchoServer {
                     out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                     String str = in.readLine();
                     if (str != null && !str.isEmpty()) {
-                        if (str.contains("?msg=Bye")) {
-                            server.close();
+                        if (str.contains("?msg=")) {
+                            String temp = str.split("/?msg=")[1];
+                            String key = temp.split(" ")[0];
+                            if ("Exit".equals(key)) {
+                                server.close();
+                            } else {
+                                out.write((key + "\r\n").getBytes());
+                            }
                         }
                         System.out.println(str);
                     }
