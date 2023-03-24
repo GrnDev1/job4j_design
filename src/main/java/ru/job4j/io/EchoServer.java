@@ -20,8 +20,10 @@ public class EchoServer {
                             String key = temp.split(" ")[0];
                             if ("Exit".equals(key)) {
                                 server.close();
-                            } else {
+                            } else if ("Hello".equals(key)) {
                                 out.write((key + "\r\n").getBytes());
+                            } else {
+                                out.write("What\r\n".getBytes());
                             }
                         }
                         System.out.println(str);
