@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    -Employee Object -
+    Fields:
+    private final boolean sex;
+    private final int age;
+    private final Contact contact;
+    private final String[] statuses;
+    -->
+
+<Employee sex="false" age="30">
+    <Contact phone="11-111" salary="500"/>
+    <statuses>
+        <status>Worker</status>
+        <status>Married</status>
+    </statuses>
+</Employee>
