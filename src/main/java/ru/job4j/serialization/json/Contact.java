@@ -9,6 +9,14 @@ public class Contact {
         this.salary = salary;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
     @Override
     public String toString() {
         return "Contact{"
