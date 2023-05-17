@@ -11,7 +11,8 @@ RETURNS TRIGGER AS
 $$
 BEGIN
 UPDATE products
-SET price = price + price * 0.2;
+SET price = price + price * 0.2
+WHERE id IN (SELECT id FROM INSERTED);
 return NEW;
 END;
 $$
