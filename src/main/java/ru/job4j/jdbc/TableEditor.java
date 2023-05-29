@@ -88,7 +88,7 @@ public class TableEditor implements AutoCloseable {
         getTableScheme(tableName);
     }
 
-    public String getTableScheme(String tableName) throws Exception {
+    public void getTableScheme(String tableName) throws Exception {
         var rowSeparator = "-".repeat(30).concat(System.lineSeparator());
         var header = String.format("%-15s|%-15s%n", "NAME", "TYPE");
         var buffer = new StringJoiner(rowSeparator, rowSeparator, rowSeparator);
@@ -105,7 +105,6 @@ public class TableEditor implements AutoCloseable {
             }
         }
         System.out.println(buffer + "\n\n");
-        return buffer.toString();
     }
 
     @Override
