@@ -30,10 +30,6 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
-    private void getSchema(String tableName) throws Exception {
-        System.out.println(getTableScheme(tableName) + "\n\n");
-    }
-
     private void getStatement(String query) throws Exception {
         try (Statement statement = connection.createStatement()) {
             statement.execute(query);
@@ -46,7 +42,7 @@ public class TableEditor implements AutoCloseable {
                 tableName
         );
         getStatement(sql);
-        getSchema(tableName);
+        getTableScheme(tableName);
     }
 
     public void dropTable(String tableName) throws Exception {
@@ -66,7 +62,7 @@ public class TableEditor implements AutoCloseable {
                 type
         );
         getStatement(sql);
-        getSchema(tableName);
+        getTableScheme(tableName);
     }
 
     public void dropColumn(String tableName, String columnName) throws Exception {
@@ -77,7 +73,7 @@ public class TableEditor implements AutoCloseable {
                 columnName
         );
         getStatement(sql);
-        getSchema(tableName);
+        getTableScheme(tableName);
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) throws Exception {
@@ -89,7 +85,7 @@ public class TableEditor implements AutoCloseable {
                 newColumnName
         );
         getStatement(sql);
-        getSchema(tableName);
+        getTableScheme(tableName);
     }
 
     public String getTableScheme(String tableName) throws Exception {
@@ -108,6 +104,7 @@ public class TableEditor implements AutoCloseable {
                 );
             }
         }
+        System.out.println(buffer + "\n\n");
         return buffer.toString();
     }
 
