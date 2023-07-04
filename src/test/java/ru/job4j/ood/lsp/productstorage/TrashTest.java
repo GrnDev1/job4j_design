@@ -17,7 +17,8 @@ class TrashTest {
         List<Store> list = List.of(wareHouse, shop, trash);
         ControlQuality controlQuality = new ControlQuality(list);
         Cheese cheese = new Cheese("Riccota", LocalDateTime.of(2023, Month.JULY, 4, 17, 10), LocalDateTime.of(2023, Month.JULY, 1, 10, 20), 500.0, 30);
-        controlQuality.allocate(cheese);
+        LocalDateTime time = LocalDateTime.of(2023, Month.JULY, 4, 17, 20);
+        controlQuality.allocate(new PercentCounter(cheese, time).setPercent());
         assertThat(trash.findAll().get(0)).isEqualTo(cheese);
     }
 

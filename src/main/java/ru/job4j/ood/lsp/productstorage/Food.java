@@ -8,6 +8,15 @@ public abstract class Food {
     private LocalDateTime createDate;
     private double price;
     private double discount;
+    private double expiryPercent;
+
+    public double getExpiryPercent() {
+        return expiryPercent;
+    }
+
+    public void setExpiryPercent(double expiryPercent) {
+        this.expiryPercent = expiryPercent;
+    }
 
     public Food(String name, LocalDateTime expiryDate, LocalDateTime createDate, double price, double discount) {
         this.name = name;
