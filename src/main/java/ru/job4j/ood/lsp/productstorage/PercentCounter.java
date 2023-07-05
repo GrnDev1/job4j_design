@@ -4,15 +4,13 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class PercentCounter {
-    private Food food;
     private LocalDateTime date;
 
-    public PercentCounter(Food food, LocalDateTime date) {
-        this.food = food;
+    public PercentCounter(LocalDateTime date) {
         this.date = date;
     }
 
-    public Food setPercent() {
+    public Food setPercent(Food food) {
         LocalDateTime expiryDate = food.getExpiryDate();
         LocalDateTime createDate = food.getCreateDate();
         long diffNowCreateDate = ChronoUnit.MINUTES.between(createDate, date);
