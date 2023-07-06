@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractParking implements Parking {
-    private final int truckSize;
-    private final int passengerSize;
+    final int truckSize;
+    final int passengerSize;
     List<Car> cars;
 
     public AbstractParking(int truckSize, int passengerSize) {

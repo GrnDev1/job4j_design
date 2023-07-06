@@ -1,12 +1,12 @@
 package ru.job4j.ood.lsp.parking;
 
-public class PassengerCar implements Car {
-    private int id;
-    private int size;
+import java.util.Objects;
 
-    public PassengerCar(int id, int size) {
-        this.id = id;
-        this.size = size;
+public class PassengerCar implements Car {
+    protected int id;
+    private final int size = 1;
+
+    public PassengerCar() {
     }
 
     public int getId() {
@@ -21,7 +21,28 @@ public class PassengerCar implements Car {
         return size;
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    @Override
+    public String toString() {
+        return "PassengerCar{"
+                + "id=" + id
+                + ", size=" + size
+                + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        PassengerCar car = (PassengerCar) o;
+        return id == car.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, size);
     }
 }
