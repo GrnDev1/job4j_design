@@ -5,7 +5,7 @@ import java.util.List;
 
 public abstract class AbstractStore implements Store {
     final static int FISRT = 0;
-    final static int SECOND  = 25;
+    final static int SECOND = 25;
     final static int THIRD = 50;
     final static int FOURTH = 75;
     final static int FIFTH = 100;
@@ -24,5 +24,9 @@ public abstract class AbstractStore implements Store {
 
     public List<Food> findAll() {
         return new ArrayList<>(list);
+    }
+
+    public void clear() {
+        list.clear();
     }
 }

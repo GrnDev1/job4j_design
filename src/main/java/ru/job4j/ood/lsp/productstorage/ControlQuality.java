@@ -22,4 +22,15 @@ public class ControlQuality {
         }
         return result;
     }
+
+    public void resort() {
+        List<Food> foodList = new ArrayList<>();
+        for (Store store : list) {
+            foodList.addAll(store.findAll());
+            store.clear();
+        }
+        for (Food food : foodList) {
+            this.allocate(food);
+        }
+    }
 }
